@@ -13,7 +13,7 @@ on:
       - develop
       - production
     paths:
-      - 'lib/**'
+      - "lib/**"
 
 jobs:
   test_analyse:
@@ -21,13 +21,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - uses: webfactory/ssh-agent@v0.9.0
-        with:
-         ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.16.8'
+          flutter-version: "3.16.8"
           channel: stable
+      - uses: webfactory/ssh-agent@v0.9.0
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Run flutter pub get
         run: flutter pub get
       - name: Run Static Code Analysis
