@@ -1,0 +1,31 @@
+name: Test & Analyze
+
+on:
+  workflow_dispatch:
+  #  push:
+  #    branches:
+  #      - 'develop'
+  #      - 'feature/**'
+  #      - 'fix/**'
+  #      - 'bugfix/**'
+  pull_request:
+    branches:
+      - develop
+      - production
+    paths:
+      - 'lib/**'
+
+jobs:
+  test_analyse:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.16.8'
+          channel: stable
+      - name: Run flutter pub get
+        run: flutter pub get
+      - name: Run Static Code Analysis
+        run: flutter analyze
